@@ -11,7 +11,7 @@ void testApp::setup(){
     
     sound.loadSound("beat.wav");
     sound.setLoop(true);
-    sound.setVolume(0.5);
+    sound.setVolume(0);
     sound.setMultiPlay(true);
     sound.play();
     
@@ -66,7 +66,7 @@ void testApp::update(){
 //--------------------------------------------------------------
 void testApp::draw(){
     float volume = 0.0;
-	ofBackground( 255, 255, 255 );	//Set the background color
+	ofBackground( 0, 0, 0 );	//Set the background color
 
 	//Draw only if diffFloat image is ready.
 	//It happens when the second frame from the video is obtained
@@ -79,15 +79,16 @@ void testApp::draw(){
 		ofSetColor( 255, 255, 255 );
 
 		//Draw images grayImage,  diffFloat, bufferFloat
-		grayImage.draw( 0, 0, w/2, h/2 );
-		diffFloat.draw( w/2 + 10, 0, w/2, h/2 );
-		bufferFloat.draw( 0, h/2 + 10, w/2, h/2 );
+		grayImage.draw( 0, 0, w/2, h/2);
+
+		diffFloat.draw( w/2, 0, w/2, h/2);
+		bufferFloat.draw( 0, h/2, w/2, h/2);
 
 		//Draw the image motion areas
 
 		//Shift and scale the coordinate system
 		ofPushMatrix();
-		ofTranslate( w/2+10, h/2+10 );
+		ofTranslate( w/2, h/2);
 		ofScale( 0.5, 0.5 );
 
 		//Draw bounding rectangle
@@ -106,6 +107,7 @@ void testApp::draw(){
 				if ( value >= 0.9 ) {
 //                    const
                     volume +=0.1;
+                    ofSetColor(100, 200, 200);
 					ofRect( x, y, 1, 1 );
 					//Rectangle with size 1x1 means pixel
 					//Note, this is slow function, 
@@ -116,14 +118,19 @@ void testApp::draw(){
 		ofPopMatrix();	//Restore the coordinate system
 //        cout << volume/6000 << endl;
 //        sound.setVolume(volume/6000);
+//        ofSetColor(100, 100, 100);
+//        ofFill();
+//        ofRect(0, h, w, h+200);
         float v = volume/6000;
+
          ofSetColor(200, 100, 100);
         if (v > 1) {
             sound.setVolume(1);
-            font.drawString("GOOD", 10, 100);
+            font.drawString("GOOD \n Your action make me happy", 10, h+60);
         }else{
             sound.setVolume(v);
-            font.drawString("More Act Make Louder  !", 10, 100);
+//            v = 0~1
+            font.drawString("More Act Make Louder! \n volumn:"+ofToString(v*100)+"%", 10, h+60);
         }
 //        sound.setVolume(min(volume/6000, 1));
         ofSoundUpdate();
