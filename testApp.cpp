@@ -17,6 +17,13 @@ void testApp::setup(){
     
     font.loadFont("sanha.ttf", 50);
     
+    camera.loadSound("camera.wav");
+    camera.setVolume(1);
+    
+    bSnapshot = false;
+    snapCount = 0;
+    
+    
 //	video.loadMovie("ballet1-640-360.mov");	//Load the video file
 //	video.play();						//Start the video to play
 }
@@ -134,12 +141,29 @@ void testApp::draw(){
         }
 //        sound.setVolume(min(volume/6000, 1));
         ofSoundUpdate();
+        if(bSnapshot == true){
+//            diffFloat.draw( w/2, 0, w/2, h/2);
+            camera.play();
+            img.grabScreen(w/2, 0, w/2, h/2);
+            string fileName = "snapShot_"+ofToString(10000+snapCount)+".png";
+            img.saveImage(fileName);
+            snapCount++;
+            bSnapshot = false;
+        }
+        
+        if(snapCount > 0){
+//            img.draw(w, h/2*snapCount, w/2, h/2);
+            img.draw(w,0, w/2, h/2);
+        }
         
 	}
 }
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
+    if(key == 'x'){
+        bSnapshot = true;
+    }
 
 }
 

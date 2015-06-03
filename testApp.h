@@ -45,6 +45,12 @@ public:
 	ofxCvGrayscaleImage diff;		//Absolute difference of the frames
 	ofxCvFloatImage diffFloat;		//Amplified difference images
 	ofxCvFloatImage bufferFloat;	//Buffer image
+    
+    ofSoundPlayer camera;
+    ofImage img;
+    bool bSnapshot;
+    int snapCount;
+    
 
 	void keyPressed(int key);
 	void keyReleased(int key);
