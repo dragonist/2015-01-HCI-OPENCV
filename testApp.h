@@ -24,6 +24,7 @@ Chapter 9 - Computer Vision with OpenCV
 #include "ofMain.h"
 #include "ofxOpenCv.h"
 
+
 class testApp : public ofBaseApp{
 
 public:
@@ -48,6 +49,9 @@ public:
     
     ofSoundPlayer camera;
     ofImage img;
+//    vector<ofImage> imgs;
+//    ofImage[]
+    int snapTime;
     bool bSnapshot;
     int snapCount;
     

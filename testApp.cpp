@@ -3,6 +3,7 @@
 //--------------------------------------------------------------
 void testApp::setup(){
     
+    
     video.setVerbose(true);
     video.setDeviceID(0);
     video.setDesiredFrameRate(30);
@@ -20,6 +21,7 @@ void testApp::setup(){
     camera.loadSound("camera.wav");
     camera.setVolume(1);
     
+    snapTime = ofGetFrameNum();
     bSnapshot = false;
     snapCount = 0;
     
@@ -134,6 +136,13 @@ void testApp::draw(){
         if (v > 1) {
             sound.setVolume(1);
             font.drawString("GOOD \n Your action make me happy", 10, h+60);
+            int nowTime  = ofGetFrameNum();
+            //60 = 1cho
+            if(nowTime - snapTime > 120 ){
+                snapTime = nowTime;
+                cout << ofGetFrameNum() << endl;
+                bSnapshot = true;
+            }
         }else{
             sound.setVolume(v);
 //            v = 0~1
@@ -142,7 +151,6 @@ void testApp::draw(){
 //        sound.setVolume(min(volume/6000, 1));
         ofSoundUpdate();
         if(bSnapshot == true){
-//            diffFloat.draw( w/2, 0, w/2, h/2);
             camera.play();
             img.grabScreen(w/2, 0, w/2, h/2);
             string fileName = "snapShot_"+ofToString(10000+snapCount)+".png";
@@ -154,6 +162,8 @@ void testApp::draw(){
         if(snapCount > 0){
 //            img.draw(w, h/2*snapCount, w/2, h/2);
             img.draw(w,0, w/2, h/2);
+            
+            
         }
         
 	}
@@ -162,7 +172,13 @@ void testApp::draw(){
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
     if(key == 'x'){
-        bSnapshot = true;
+        int nowTime  = ofGetFrameNum();
+        //60 = 1cho
+        if(nowTime - snapTime > 120 ){
+            snapTime = nowTime;
+            cout << ofGetFrameNum() << endl;
+            bSnapshot = true;
+        }
     }
 
 }
