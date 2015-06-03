@@ -37,6 +37,8 @@ public:
 	ofxCvColorImage image;		//The current video frame
     ofSoundPlayer  sound;      //sound
     
+    ofTrueTypeFont font;
+    
 	//The current and the previous video frames as grayscale images
 	ofxCvGrayscaleImage grayImage, grayImagePrev;
 

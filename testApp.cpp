@@ -15,6 +15,8 @@ void testApp::setup(){
     sound.setMultiPlay(true);
     sound.play();
     
+    font.loadFont("sanha.ttf", 50);
+    
 //	video.loadMovie("ballet1-640-360.mov");	//Load the video file
 //	video.play();						//Start the video to play
 }
@@ -115,10 +117,13 @@ void testApp::draw(){
 //        cout << volume/6000 << endl;
 //        sound.setVolume(volume/6000);
         float v = volume/6000;
+         ofSetColor(200, 100, 100);
         if (v > 1) {
             sound.setVolume(1);
+            font.drawString("GOOD", 10, 100);
         }else{
             sound.setVolume(v);
+            font.drawString("More Act Make Louder  !", 10, 100);
         }
 //        sound.setVolume(min(volume/6000, 1));
         ofSoundUpdate();
