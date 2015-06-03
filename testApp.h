@@ -31,10 +31,12 @@ public:
 	void update();
 	void draw();
 
-	ofVideoPlayer video;		//Declare the video player object
-
+//	ofVideoPlayer video;		//Declare the video player object
+    ofVideoGrabber video;
+    
 	ofxCvColorImage image;		//The current video frame
-
+    ofSoundPlayer  sound;      //sound
+    
 	//The current and the previous video frames as grayscale images
 	ofxCvGrayscaleImage grayImage, grayImagePrev;
 

@@ -2,8 +2,21 @@
 
 //--------------------------------------------------------------
 void testApp::setup(){
-	video.loadMovie("ballet1-640-360.mov");	//Load the video file
-	video.play();						//Start the video to play
+    
+    video.setVerbose(true);
+    video.setDeviceID(0);
+    video.setDesiredFrameRate(30);
+    video.initGrabber(640, 480);
+    video.listDevices();
+    
+    sound.loadSound("beat.wav");
+    sound.setLoop(true);
+    sound.setVolume(0.5`);
+    sound.setMultiPlay(true);
+    sound.play();
+    
+//	video.loadMovie("ballet1-640-360.mov");	//Load the video file
+//	video.play();						//Start the video to play
 }
 
 //--------------------------------------------------------------
@@ -50,6 +63,7 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
+    float volume = 0.0;
 	ofBackground( 255, 255, 255 );	//Set the background color
 
 	//Draw only if diffFloat image is ready.
@@ -88,6 +102,8 @@ void testApp::draw(){
 				float value = pixels[ x + w * y ];
 				//If value exceed threshold, then draw pixel
 				if ( value >= 0.9 ) {
+//                    const
+                    volume +=0.1;
 					ofRect( x, y, 1, 1 );
 					//Rectangle with size 1x1 means pixel
 					//Note, this is slow function, 
@@ -96,6 +112,17 @@ void testApp::draw(){
 			}
 		}
 		ofPopMatrix();	//Restore the coordinate system
+//        cout << volume/6000 << endl;
+//        sound.setVolume(volume/6000);
+        float v = volume/6000;
+        if (v > 1) {
+            sound.setVolume(1);
+        }else{
+            sound.setVolume(v);
+        }
+//        sound.setVolume(min(volume/6000, 1));
+        ofSoundUpdate();
+        
 	}
 }
 
