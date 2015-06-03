@@ -49,7 +49,7 @@ public:
     
     ofSoundPlayer camera;
     ofImage img;
-//    vector<ofImage> imgs;
+    vector<ofImage> imgs;
 //    ofImage[]
     int snapTime;
     bool bSnapshot;

@@ -155,15 +155,20 @@ void testApp::draw(){
             img.grabScreen(w/2, 0, w/2, h/2);
             string fileName = "snapShot_"+ofToString(10000+snapCount)+".png";
             img.saveImage(fileName);
+            imgs.push_back(img);
             snapCount++;
             bSnapshot = false;
         }
         
         if(snapCount > 0){
 //            img.draw(w, h/2*snapCount, w/2, h/2);
-            img.draw(w,0, w/2, h/2);
-            
-            
+//            img.draw(w,0, w/2, h/2);
+            vector<ofImage>::iterator itor;
+            int count = 0;
+            for(itor = imgs.begin(); itor != imgs.end(); ++itor){
+                itor->draw(w,count*h/2, w/2, h/2);
+                count++;
+            }
         }
         
 	}
