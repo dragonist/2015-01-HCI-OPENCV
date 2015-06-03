@@ -2,7 +2,14 @@
 
 //--------------------------------------------------------------
 void testApp::setup(){
+
+    all = 6000;
     
+    colors[0].set(255, 246, 201); //노랑
+    colors[1].set(201, 243, 255); //연두
+    colors[2].set(200, 100, 100); //분홍
+    
+//    #D1EADD
     
     video.setVerbose(true);
     video.setDeviceID(0);
@@ -16,7 +23,7 @@ void testApp::setup(){
     sound.setMultiPlay(true);
     sound.play();
     
-    font.loadFont("sanha.ttf", 50);
+    font.loadFont("sanha.ttf", 40);
     
     camera.loadSound("camera.wav");
     camera.setVolume(1);
@@ -130,7 +137,7 @@ void testApp::draw(){
 //        ofSetColor(100, 100, 100);
 //        ofFill();
 //        ofRect(0, h, w, h+200);
-        float v = volume/6000;
+        float v = volume/all;
 
          ofSetColor(200, 100, 100);
         if (v > 1) {
@@ -140,13 +147,14 @@ void testApp::draw(){
             //60 = 1cho
             if(nowTime - snapTime > 120 ){
                 snapTime = nowTime;
-                cout << ofGetFrameNum() << endl;
+//                cout << ofGetFrameNum() << endl;
                 bSnapshot = true;
             }
         }else{
             sound.setVolume(v);
 //            v = 0~1
-            font.drawString("More Act Make Louder! \n volumn:"+ofToString(v*100)+"%", 10, h+60);
+            font.drawString("More Act Make Louder! \n volumn:"+ofToString((int)(v*100))+"%", 10, h+60);
+//            font.drawString("More Act Make Louder! \n volumn:"+ofToString(v*100).+"%", 10, h+60);
         }
 //        sound.setVolume(min(volume/6000, 1));
         ofSoundUpdate();
@@ -164,10 +172,11 @@ void testApp::draw(){
 //            img.draw(w, h/2*snapCount, w/2, h/2);
 //            img.draw(w,0, w/2, h/2);
             vector<ofImage>::iterator itor;
-            int count = 0;
+            int count = snapCount;
             for(itor = imgs.begin(); itor != imgs.end(); ++itor){
+                count--;
+                ofSetColor(colors[count%3]);
                 itor->draw(w,count*h/2, w/2, h/2);
-                count++;
             }
         }
         
@@ -179,7 +188,7 @@ void testApp::keyPressed(int key){
     if(key == 'x'){
         int nowTime  = ofGetFrameNum();
         //60 = 1cho
-        if(nowTime - snapTime > 120 ){
+        if(nowTime - snapTime > 60 ){
             snapTime = nowTime;
             cout << ofGetFrameNum() << endl;
             bSnapshot = true;

@@ -50,10 +50,13 @@ public:
     ofSoundPlayer camera;
     ofImage img;
     vector<ofImage> imgs;
-//    ofImage[]
+    ofColor colors[3];
+    
     int snapTime;
     bool bSnapshot;
     int snapCount;
+    
+    int all;
     
 
 	void keyPressed(int key);
