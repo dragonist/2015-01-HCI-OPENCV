@@ -11,7 +11,7 @@ void testApp::setup(){
     
     sound.loadSound("beat.wav");
     sound.setLoop(true);
-    sound.setVolume(0.5`);
+    sound.setVolume(0.5);
     sound.setMultiPlay(true);
     sound.play();
     
