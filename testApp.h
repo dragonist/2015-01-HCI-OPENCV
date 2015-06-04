@@ -37,6 +37,10 @@ public:
     
 	ofxCvColorImage image;		//The current video frame
     ofSoundPlayer  sound;      //sound
+    string sounds[13];
+    int soundCount;
+    
+    ofSoundPlayer voice;
     
     ofTrueTypeFont font;
     
@@ -57,6 +61,14 @@ public:
     int snapCount;
     
     int all;
+    
+    float * fftSmoothed;
+    float px, py, vx, vy;
+    int nBandsToGet;
+    float prevx, prevy;
+    
+    float v;
+    
     
 
 	void keyPressed(int key);
